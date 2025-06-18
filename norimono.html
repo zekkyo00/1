@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アトラクション詳細</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .attraction-title {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .attraction-image {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .section {
+      margin-bottom: 1.5rem;
+    }
+    .section h2 {
+      font-size: 1.2rem;
+      border-left: 4px solid #e91e63;
+      padding-left: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .back-link {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: #e91e63;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .back-link:hover {
+      background: #c2185b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="title" class="attraction-title">アトラクション名</div>
+    <img id="image" class="attraction-image" src="" alt="画像">
+
+    <div class="section">
+      <h2>【概要】</h2>
+      <p id="description"></p>
+    </div>
+
+    <div class="section">
+      <h2>【場所】</h2>
+      <p id="location"></p>
+    </div>
+
+    <div class="section">
+      <h2>【最高速度】</h2>
+      <p id="speed"></p>
+    </div>
+
+    <div class="section">
+      <h2>【最大高さ】</h2>
+      <p id="height"></p>
+    </div>
+
+    <a href="javascript:history.back();" class="back-link">⬅ 戻る</a>
+  </div>
+
+  <script>
+    const data = {
+      dodonpa: {
+        name: "ドドンパ",
+        image: "./img/dodonpa.jpg",
+        description: "驚異の加速力で知られる富士急ハイランドの名物コースター。",
+        location: "富士急ハイランド（山梨県）",
+        speed: "180km/h",
+        height: "49m"
+      }
+    };
+
+    const name = new URLSearchParams(location.search).get("name");
+    const attraction = data[name];
+
+    if (attraction) {
+      document.getElementById("title").textContent = attraction.name;
+      document.getElementById("image").src = attraction.image;
+      document.getElementById("description").textContent = attraction.description;
+      document.getElementById("location").textContent = attraction.location;
+      document.getElementById("speed").textContent = attraction.speed;
+      document.getElementById("height").textContent = attraction.height;
+    } else {
+      document.querySelector(".container").innerHTML = "<p>アトラクション情報が見つかりません。</p>";
+    }
+  </script>
+</body>
+</html>
