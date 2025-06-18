@@ -41,6 +41,15 @@
       max-width: 1000px;
       margin: 0 auto;
       padding: 0 1rem;
+      box-sizing: border-box;
+    }
+
+    /* PC以上だけ max-width を設定 */
+    @media (min-width: 768px) {
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
     }
 
     .search {
@@ -133,13 +142,21 @@
       background: #ffffff;
       color: #333;
       border-radius: 12px;
-      padding: 1.5rem 2rem;
+      padding: 1.5rem 1rem;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       width: 100%;
       max-width: 600px;
       text-align: center;
       box-sizing: border-box;
     }
+
+    @media (min-width: 768px) {
+      .total-ranking {
+        max-width: 600px;
+        padding: 1.5rem 1rem;
+      }
+    }
+
 
     .total-ranking h3 {
       margin: 0 0 1rem;
