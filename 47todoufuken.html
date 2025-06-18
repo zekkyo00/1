@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>都道府県ページ</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      scroll-behavior: auto; /* スクロールアニメーションを無効にする */
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .pref-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .pref-image {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .section {
+      margin-bottom: 1.5rem;
+    }
+    .section h2 {
+      font-size: 1.2rem;
+      border-left: 4px solid #2196f3;
+      padding-left: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .ranking-list li {
+      margin-bottom: 0.5rem;
+    }
+    .back-link {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: #2196f3;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    .back-link:hover {
+      background: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="pref-name" class="pref-title">都道府県名</div>
+    <img id="pref-img" class="pref-image" src="" alt="都道府県の画像">
+
+    <div class="section">
+      <h2>🎢 人気アトラクションランキング</h2>
+      <ol id="ranking" class="ranking-list"></ol>
+    </div>
+
+    <div class="section">
+      <h2>📝 都道府県紹介</h2>
+      <p id="description"></p>
+    </div>
+
+    <div class="section">
+      <h2>🚆 アクセス</h2>
+      <p id="access"></p>
+    </div>
+
+    <a href="attraction-site.html" class="back-link" onclick="history.back(); return false;">🔙 地図に戻る</a>
+  </div>
+
+  <script>
+    const data = {
+      "01": {
+        name: "北海道",
+        image: "./img/hokkaido.jpg",
+        description: "雪と自然、海鮮と大地の魅力にあふれる北の大地。",
+        access: "新千歳空港 → 札幌駅 約40分、羽田空港から約1時間40分",
+        ranking: [
+          "ホワイトスピン",
+          "北極ブレイカー",
+          "クリオネダイブ"
+        ]
+      },
+      "13": {
+        name: "東京都",
+        image: "./img/tokyo.jpg",
+        description: "首都としての魅力にあふれたエンタメの聖地。",
+        access: "羽田空港、成田空港、新幹線で全国からアクセス良好",
+        ranking: [
+          "東京タワーダイブ",
+          "スカイサンダー",
+          "メトロスクリーマー"
+        ]
+      },
+      "27": {
+        name: "大阪府",
+        image: "./img/osaka.jpg",
+        description: "グルメとユニバーサル・スタジオで賑わう都市。",
+        access: "関西空港・新大阪駅からスムーズアクセス",
+        ranking: [
+          "ドットンループ",
+          "タコヤキドロップ",
+          "グリコライダー"
+        ]
+      },
+      "23": {
+        name: "愛知県",
+        image: "./img/aichi.jpg",
+        description: "トヨタ博物館やレゴランドなど家族に人気。",
+        access: "中部国際空港・名古屋駅からアクセス良好",
+        ranking: [
+          "レゴスピナー",
+          "侍スクリュー",
+          "金シャチフライヤー"
+        ]
+      },
+      "40": {
+        name: "福岡県",
+        image: "./img/fukuoka.jpg",
+        description: "ラーメンと祭りと海のアトラクション都市。",
+        access: "福岡空港・博多駅が市街地から近い",
+        ranking: [
+          "博多トルネード",
+          "屋台ジェット",
+          "中洲ライダー"
+        ]
+      }
+    };
+
+    const id = new URLSearchParams(location.search).get("id");
+    const pref = data[id];
+    if (pref) {
+      document.getElementById("pref-name").textContent = pref.name;
+      document.getElementById("pref-img").src = pref.image;
+      document.getElementById("description").textContent = pref.description;
+      document.getElementById("access").textContent = pref.access;
+
+      const rankingList = document.getElementById("ranking");
+      pref.ranking.forEach(name => {
+        const li = document.createElement("li");
+        li.textContent = name;
+        rankingList.appendChild(li);
+      });
+    } else {
+      document.querySelector(".container").innerHTML = "<p>都道府県情報が見つかりません。</p>";
+    }
+  </script>
+</body>
+</html>
